@@ -24,7 +24,7 @@ const Sidebar = ({ sidebar, handleSidebar }: SideBar) => {
             <span className="material-symbols-outlined">person</span>
           </div>
           <div className="line"></div>
-          <div className="moreDetails">
+          <div className="moreDetails" onClick={handleSidebar}>
             <p>Customize Your Profile</p>
             <span className="material-symbols-outlined">more_up</span>
           </div>
