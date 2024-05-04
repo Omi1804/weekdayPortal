@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./searchArea.css";
 import MultiSelect from "../SubComponents/Select";
 import { TextField } from "@mui/material";
+import Card from "../SubComponents/Card/Card";
 
 const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
   const [roles, setRoles] = useState([]);
@@ -57,12 +58,13 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
     <div className={`searchArea ${sidebar ? "open" : ""}`}>
       <div className="filters">
         <MultiSelect
-          label="Roles"
+          label="Job Roles"
           options={roleOptions}
           value={roles}
           onChange={(e: any) => {
             setRoles(e.target.value);
           }}
+          minWidth="14rem"
         />
         <MultiSelect
           label="Number Of Employees"
@@ -71,6 +73,7 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
           onChange={(e: any) => {
             setNoOfEmployees(e.target.value);
           }}
+          minWidth="17rem"
         />
         <MultiSelect
           label="Experience"
@@ -79,6 +82,7 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
           onChange={(e: any) => {
             setExperience(e.target.value);
           }}
+          minWidth="10rem"
         />
         <MultiSelect
           label="Remote"
@@ -87,6 +91,7 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
           onChange={(e: any) => {
             setJobType(e.target.value);
           }}
+          minWidth="10rem"
         />
         <MultiSelect
           label="Minimum Base Pay Salary"
@@ -95,6 +100,7 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
           onChange={(e: any) => {
             setMinimumBasePaySalary(e.target.value);
           }}
+          minWidth="17rem"
         />
         <TextField
           id="outlined-basic"
@@ -104,9 +110,13 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
           onChange={(e: any) => {
             setSearchText(e.target.value);
           }}
+          size="small"
+          sx={{ width: "20rem", bgcolor: "white" }}
         />
       </div>
-      <div className="jobCards"></div>
+      <div className="jobCards">
+        <Card />
+      </div>
     </div>
   );
 };

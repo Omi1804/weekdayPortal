@@ -16,6 +16,7 @@ const App = () => {
     <div>
       <Header sidebar={sidebar} />
       <Sidebar sidebar={sidebar} handleSidebar={handleSidebar} />
+
       <SearchArea sidebar={sidebar} />
     </div>
   );

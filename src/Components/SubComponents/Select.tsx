@@ -7,7 +7,14 @@ import {
   Chip,
 } from "@mui/material";
 
-const MultiSelect = ({ label, options, value, onChange, ...props }: any) => {
+const MultiSelect = ({
+  minWidth,
+  label,
+  options,
+  value,
+  onChange,
+  ...props
+}: any) => {
   // Function to handle the deletion of a chip
   const handleDelete = (item: any) => () => {
     onChange({
@@ -18,8 +25,21 @@ const MultiSelect = ({ label, options, value, onChange, ...props }: any) => {
   };
 
   return (
-    <FormControl {...props}>
-      <InputLabel>{label}</InputLabel>
+    <FormControl
+      sx={{
+        minWidth: minWidth,
+        bgcolor: "white",
+      }}
+      size="small"
+      {...props}
+    >
+      <InputLabel
+        sx={{
+          paddingInline: "1rem",
+        }}
+      >
+        {label}
+      </InputLabel>
       <Select
         multiple
         value={value}

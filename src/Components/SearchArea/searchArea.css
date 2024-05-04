@@ -1,9 +1,10 @@
 .searchArea {
-  border: 3px solid blue;
   width: calc(100% - 6rem);
   transition: all 0.1s ease;
   margin-top: 3.7rem;
-  padding: 3rem 2rem;
+  padding: 3rem 6cap;
+  background-color: #f9f9f9;
+  height: calc(100vh - 60px);
 }
 
 .searchArea.open {
@@ -12,5 +13,17 @@
 
 .filters {
   display: flex;
+  align-items: center;
+  /* justify-content: center; */
+
   flex-wrap: wrap;
+  column-gap: 0.5rem;
+  row-gap: 1rem;
+}
+
+.jobCards {
+  border: 3px solid blue;
+  margin-block: 4rem;
+  display: grid;
+  grid-template-columns: 3fr;
 }

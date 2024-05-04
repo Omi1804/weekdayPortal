@@ -6,6 +6,7 @@
   padding: 0.5rem 3rem;
   position: fixed;
   color: #222;
+  background-color: white;
   width: calc(100% - 6rem);
   top: 0;
   border-bottom-left-radius: 10px;
