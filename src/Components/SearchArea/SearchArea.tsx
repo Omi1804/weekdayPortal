@@ -118,6 +118,9 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
         <Card />
         <Card />
         <Card />
+        <Card />
+        <Card />
+        <Card />
       </div>
     </div>
   );
