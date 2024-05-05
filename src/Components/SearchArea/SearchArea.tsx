@@ -116,6 +116,8 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
       </div>
       <div className="jobCards">
         <Card />
+        <Card />
+        <Card />
       </div>
     </div>
   );

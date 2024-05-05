@@ -4,7 +4,6 @@
   margin-top: 3.7rem;
   padding: 3rem 6cap;
   background-color: #f9f9f9;
-  height: calc(100vh - 60px);
 }
 
 .searchArea.open {
@@ -22,8 +21,9 @@
 }
 
 .jobCards {
-  border: 3px solid blue;
+  border: 3px solid red;
   margin-block: 4rem;
   display: grid;
-  grid-template-columns: 3fr;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
 }
