@@ -1,0 +1,111 @@
+.jobContent {
+  width: calc(100% - 6rem);
+  padding: 3rem 4rem;
+  background-color: #f9f9f9;
+  margin-top: 2rem;
+  min-height: 92vh;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.jobContent.open {
+  width: calc(100% - 22rem);
+}
+
+.job-container {
+  display: flex;
+  gap: 2rem; /* Ensure spacing between sidebar and main content */
+}
+
+.job-sidebar {
+  width: 20rem;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.job-main {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.back {
+  color: rgb(24, 118, 210);
+  border: none;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-left: 0.8rem;
+  background-color: #f0f0f0;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.back:hover {
+  background-color: rgb(24, 118, 210);
+  color: white;
+}
+
+.sidebar-section h6,
+.job-main > h4 {
+  color: #333;
+  font-weight: 600;
+}
+
+.sidebar-section p,
+.job-description p,
+.roleResponsibility p {
+  color: #666;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.job-description h4 {
+  font-size: 1.25rem;
+  color: #333;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.role-overview,
+.roleResponsibility {
+  margin-top: 2rem;
+}
+
+.role-overview ul {
+  list-style-type: none; /* Remove list bullets */
+  padding: 0;
+}
+
+.role-overview ul li {
+  margin-bottom: 0.5rem; /* Space between list items */
+}
+
+.role-overview p,
+.roleResponsibility p {
+  text-align: justify;
+}
+
+.applybtn {
+  width: 100%;
+  margin-block: 2rem 0rem;
+  background-color: rgb(85, 239, 196);
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  padding: 8px 18px;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+}

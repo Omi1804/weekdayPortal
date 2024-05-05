@@ -1,8 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./card.css";
 
 const Card = ({ job }: any) => {
   const [showMore, setShowMore] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate(`/${job.jdUid}`, { state: { job } });
+  };
 
   return (
     <>
@@ -39,7 +45,9 @@ const Card = ({ job }: any) => {
           <h3>Minimum Experience</h3>
           <p>{job.minExp ? job.minExp : 0} years</p>
         </div>
-        <button className="applybtn">⚡️Easy Apply</button>
+        <button className="applybtn" onClick={handleNavigation}>
+          ⚡️Easy Apply
+        </button>
       </div>
       {showMore && (
         <div className="detailedAbout">

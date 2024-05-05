@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+
 import "./searchArea.css";
 import MultiSelect from "../SubComponents/Select";
 import { TextField } from "@mui/material";
