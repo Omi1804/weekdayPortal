@@ -24,12 +24,12 @@ const Card = ({ job }: any) => {
             <h1>{job.companyName}</h1>
             <p className="post">{job.jobRole} </p>
             <p className="location">
-              {job.location} | Exp: {job.minExp} - {job.maxExp} years
+              {job.location} | Exp: {job.minExp || 0} - {job.maxExp || 0} years
             </p>
           </div>
         </div>
         <p className="approxSalary">
-          Estimated Salary: {job.minJdSalary} - {job.maxJdSalary} LPA ✅
+          Estimated Salary: {job.minJdSalary || 5} - {job.maxJdSalary} LPA ✅
         </p>
         <div className="jobAboutSec">
           <h3>About Company:</h3>
