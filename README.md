@@ -8,7 +8,7 @@
 
 A dynamic and user-friendly dashboard utilizing the Weekday API to showcase job listings and company details. Designed for ease of use and seamless integration, this project is perfect for those looking to manage or explore job opportunities effectively.
 
-[![Watch the video](https://drive.google.com/file/d/1DEz5eC1X3tpuj5ofJzAz9b5aFhIkWOop/view?usp=drive_link)](<[YOUR_VIDEO_LINK_HERE](https://drive.google.com/file/d/1XsK6l0mXzvgXfpcpX7ggKX7_U_m_MFWN/view?usp=sharing)>)
+[![Watch the video](https://drive.google.com/file/d/1DEz5eC1X3tpuj5ofJzAz9b5aFhIkWOop/view?usp=drive_link)](https://drive.google.com/file/d/1XsK6l0mXzvgXfpcpX7ggKX7_U_m_MFWN/view?usp=drive_link)
 
 ## Table of Contents
 
