@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./searchArea.css";
 import MultiSelect from "../SubComponents/Select";
 import { TextField } from "@mui/material";
 import Card from "../SubComponents/Card/Card";
+import {
+  experienceOptions,
+  minimumBasePaySalaryOptions,
+  noOfEmployeesOptions,
+  remoteOptions,
+  roleOptions,
+} from "./selectOptions";
 
 const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
+  //filters
   const [roles, setRoles] = useState([]);
   const [noOfEmployees, setNoOfEmployees] = useState([]);
   const [experience, setExperience] = useState([]);
@@ -12,47 +20,141 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
   const [minimumBasePaySalary, setMinimumBasePaySalary] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  const roleOptions = [
-    { value: "backend", label: "Backend" },
-    { value: "frontend", label: "Frontend" },
-    { value: "fullstack", label: "Fullstack" },
+  //fetched data
+  const [jobsData, setJobData] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
 
-    { value: "ux", label: "UX Design" },
-    { value: "ui", label: "UI Design" },
+  // useEffect(() => {
+  //   fetchJobs();
+  // }, []);
 
-    { value: "hr", label: "Human Resources" },
-    { value: "op", label: "Operations" },
-  ];
+  //fetching data
+  // const fetchJobs = () => {
+  //   const requestOptions = {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ limit: 12, offset: 0 }),
+  //   };
+  //   fetch(
+  //     "https://api.weekday.technology/adhoc/getSampleJdJSON",
+  //     requestOptions
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setJobData(data.jdList);
+  //       setFilteredJobs(data.jdList);
+  //       console.log(data);
+  //     })
+  //     .catch((error) => console.error(error));
+  // };
+  const fetchJobs = useCallback(() => {
+    if (!hasMore) return;
 
-  const minimumBasePaySalaryOptions = [
-    { value: "10k", label: "10K" },
-    { value: "20k", label: "20K" },
-    { value: "30k", label: "30K" },
-    { value: "40k", label: "40K" },
-    { value: "50k", label: "50K" },
-  ];
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ limit: 12, offset }),
+    };
+    fetch(
+      "https://api.weekday.technology/adhoc/getSampleJdJSON",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.jdList.length === 0) {
+          setHasMore(false);
+        } else {
+          setJobData((prevJobs) => [...prevJobs, ...data.jdList]);
+          setFilteredJobs((prevJobs) => [...prevJobs, ...data.jdList]);
+        }
+      })
+      .catch((error) => console.error(error));
+  }, [offset, hasMore]);
 
-  const remoteOptions = [
-    { value: "remote", label: "Remote" },
-    { value: "hybird", label: "Hybrid" },
-    { value: "inOffice", label: "In Office" },
-  ];
+  // Initial fetch
+  useEffect(() => {
+    fetchJobs();
+  }, [fetchJobs]);
 
-  const experienceOptions = [
-    { value: "1-2", label: "1-2" },
-    { value: "2-5", label: "2-5" },
-    { value: "5-10", label: "5-10" },
-    { value: "10-20", label: "10-20" },
-    { value: "20+", label: "20+" },
-  ];
+  useEffect(() => {
+    const filterData = () => {
+      let result = jobsData;
 
-  const noOfEmployeesOptions = [
-    { value: "1-10", label: "1-10" },
-    { value: "11-20", label: "11-20" },
-    { value: "21-50", label: "21-50" },
-    { value: "51-100", label: "51-100" },
-    { value: "100+", label: "100+" },
-  ];
+      //According to the Roles
+      if (roles.length)
+        result = result.filter((job) => roles.includes(job.jobRole));
+
+      if (noOfEmployees.length)
+        result = result.filter((job) =>
+          noOfEmployees.includes(job.noOfEmployees)
+        );
+
+      //According to the Experience
+      if (experience.length) {
+        result = result.filter((job) =>
+          experience.includes(JSON.stringify(job.minExp))
+        );
+      }
+
+      //According to the Location
+      if (jobType.length) {
+        if (jobType.includes("remote")) {
+          result = result.filter((job) => job.location === "remote");
+        }
+        if (jobType.includes("hybrid")) {
+          result = result.filter((job) => job.location === "hybrid");
+        }
+      }
+
+      //According to the Salaray
+      if (minimumBasePaySalary.length) {
+        result = result.filter((job) => {
+          const jobMinSalary = Number(job.minJdSalary);
+          const jobMaxSalary = Number(job.maxJdSalary);
+
+          return minimumBasePaySalary.some(
+            (salaryOption) =>
+              jobMinSalary <= Number(salaryOption) &&
+              jobMaxSalary >= Number(salaryOption)
+          );
+        });
+      }
+
+      if (searchText)
+        result = result.filter((job) =>
+          job.companyName.toLowerCase().includes(searchText.toLowerCase())
+        );
+
+      setFilteredJobs(result);
+    };
+
+    filterData();
+  }, [
+    roles,
+    noOfEmployees,
+    experience,
+    jobType,
+    minimumBasePaySalary,
+    searchText,
+    jobsData,
+  ]);
+
+  // Infinite scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight
+      )
+        return;
+      setOffset((prevOffset) => prevOffset + 12);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className={`searchArea ${sidebar ? "open" : ""}`}>
@@ -67,15 +169,6 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
           minWidth="14rem"
         />
         <MultiSelect
-          label="Number Of Employees"
-          options={noOfEmployeesOptions}
-          value={noOfEmployees}
-          onChange={(e: any) => {
-            setNoOfEmployees(e.target.value);
-          }}
-          minWidth="17rem"
-        />
-        <MultiSelect
           label="Experience"
           options={experienceOptions}
           value={experience}
@@ -85,7 +178,7 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
           minWidth="10rem"
         />
         <MultiSelect
-          label="Remote"
+          label="Location"
           options={remoteOptions}
           value={jobType}
           onChange={(e: any) => {
@@ -102,6 +195,15 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
           }}
           minWidth="17rem"
         />
+        <MultiSelect
+          label="Number Of Employees"
+          options={noOfEmployeesOptions}
+          value={noOfEmployees}
+          onChange={(e: any) => {
+            setNoOfEmployees(e.target.value);
+          }}
+          minWidth="17rem"
+        />
         <TextField
           id="outlined-basic"
           label="Search Company Name"
@@ -114,14 +216,22 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
           sx={{ width: "20rem", bgcolor: "white" }}
         />
       </div>
-      <div className="jobCards">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </div>
+      {filteredJobs.length > 0 ? (
+        <div className="jobCards">
+          {filteredJobs.map((job) => (
+            <Card key={job.jdUid} job={job} />
+          ))}
+        </div>
+      ) : (
+        <div className="noJobs">
+          <div className="icon">
+            <img src="/errorFound.png" alt="" />
+          </div>
+          <p className="desc">
+            No Jobs available for this category at the moment
+          </p>
+        </div>
+      )}
     </div>
   );
 };

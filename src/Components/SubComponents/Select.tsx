@@ -53,6 +53,7 @@ const MultiSelect = ({
                 label={item}
                 onDelete={handleDelete(item)}
                 color="primary"
+                size="small"
               />
             ))}
           </div>
