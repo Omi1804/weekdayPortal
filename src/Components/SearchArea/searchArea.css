@@ -27,6 +27,19 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
+@media (max-width: 1024px) {
+  /* for tablets and below */
+  .jobCards {
+    grid-template-columns: repeat(2, 1fr); /* switch to 2 columns */
+  }
+}
+
+@media (max-width: 768px) {
+  /* for small tablets and large phones */
+  .jobCards {
+    grid-template-columns: 1fr; /* switch to 1 column */
+  }
+}
 
 .noJobs {
   width: 100%;

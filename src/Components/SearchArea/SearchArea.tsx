@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-
 import "./searchArea.css";
 import MultiSelect from "../SubComponents/Select";
 import { TextField } from "@mui/material";
@@ -21,35 +20,13 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
   const [minimumBasePaySalary, setMinimumBasePaySalary] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  //fetched data
+  // fetched data
   const [jobsData, setJobData] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
-  // useEffect(() => {
-  //   fetchJobs();
-  // }, []);
-
-  //fetching data
-  // const fetchJobs = () => {
-  //   const requestOptions = {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ limit: 12, offset: 0 }),
-  //   };
-  //   fetch(
-  //     "https://api.weekday.technology/adhoc/getSampleJdJSON",
-  //     requestOptions
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setJobData(data.jdList);
-  //       setFilteredJobs(data.jdList);
-  //       console.log(data);
-  //     })
-  //     .catch((error) => console.error(error));
-  // };
+  //Fetching Jobs with useCallback for cached data
   const fetchJobs = useCallback(() => {
     if (!hasMore) return;
 
@@ -155,7 +132,7 @@ const SearchArea = ({ sidebar }: { sidebar: boolean }) => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [offset]);
 
   return (
     <div className={`searchArea ${sidebar ? "open" : ""}`}>
