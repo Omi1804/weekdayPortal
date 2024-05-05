@@ -1,30 +1,51 @@
-# React + TypeScript + Vite
+# Weekday UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A dashboard made using Weekday's API to display cards about job listings.
 
-Currently, two official plugins are available:
+## How to run?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To get the server running locally:
 
-## Expanding the ESLint configuration
+1. Clone the repo
+   ```bash
+   git clone https://github.com/Omi1804/weekdayPortal.git
+   cd weekdayPortal
+   ```
+2. Install the dependencies
+   ```bash
+   npm install
+   # or
+   yarn
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+3. Run the development server
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+4. Open http://localhost:5173/ to view it in the browser.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## File Structure
 
-- Configure the top-level `parserOptions` property like this:
+<strong>-src/components:</strong>
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<ol>
+<li><strong>CompanyDetails: </strong>Reusable Company Detailed Description to Apply on.</li>
+<li><strong>Header: </strong>Reusable Header component To be served as Navbar In future</li>
+<li><strong>SearchArea: </strong>All the Searching Components With Card Grid.</li>
+<li><strong>SideBar: </strong>Reusable SideBar to be Used to Fill User's Details for Further Use</li>
+<li><strong>SubComponents: </strong>Reusable Small Components like Card.tsx or Select input tag.</li>
+</ol>
+<strong>-src/reduxFiles:</strong>
+<ol>
+<li><strong>jobSlice.ts: </strong>Contains all the Job fetching and Filtered Job Reducer</li>
+<li><strong>userSlice.ts: </strong>Contains all the User Related Data which can be used anywhere in the application</li>
+<li><strong>store.ts: </strong>Contains the React Redux Toolkit configurations</li>

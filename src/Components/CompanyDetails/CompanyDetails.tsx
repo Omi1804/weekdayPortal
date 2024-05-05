@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-const CompanyDetails = ({ sidebar }) => {
+const CompanyDetails = ({ sidebar }: { sidebar: boolean }) => {
   const navigate = useNavigate();
 
   const {
